@@ -52,16 +52,15 @@ async function loadStep() {
     const allow = await inquirer.prompt({
         name: 'confirmation',
         message: `You have chosen ${JSON.stringify(values)}. Is that correct?`,
-        type: 'confirm',
+        type: 'list',
         choices: [
             'Yes',
             'No'
-        ],
+        ]
     });
 
-    var confirm_start = allow.confirmation;
-
-    confirm_start == 'Yes' ? await loadPlugins(values) : process.exit(1);
+    var confirm = allow.confirmation;
+    confirm == 'Yes' ? loadPlugins(values) : process.exit(1);
 }
 
 async function loadPlugins(plugin_set){
@@ -99,7 +98,7 @@ async function loadPlugins(plugin_set){
             });
         break;
     }
-    const loadSpinner = createSpinner('Downloading').start();
+    const loadSpinner = createSpinner(`Downloading ${plugin_set}`).start();
     await sleep(5000);
     loadSpinner.success();
     complete();
