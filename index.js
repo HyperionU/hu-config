@@ -72,6 +72,7 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
+            var ms = 22000;
         break;
         case 'Slim':
             exec('sh install_slim.sh', (error) => {
@@ -80,6 +81,7 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
+            var ms = 10000;
         break; 
         case 'SuperSlim':
             exec('sh install_superslim.sh', (error) => {
@@ -88,6 +90,7 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
+            var ms = 8000;
         break;
         case 'Theme Only':
             exec('sh install_theme.sh', (error) => {
@@ -96,10 +99,11 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
+            var ms = 5000;
         break;
     }
     const loadSpinner = createSpinner(`Downloading ${plugin_set}`).start();
-    await sleep(5000);
+    await sleep(ms);
     loadSpinner.success();
     complete();
 }
