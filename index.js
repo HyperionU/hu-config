@@ -7,6 +7,7 @@ import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 import { exec } from 'child_process';
+import { error } from "console";
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -35,6 +36,7 @@ async function loadStep() {
             'Normal',
             'Slim',
             'SuperSlim',
+            'Theme Only'
         ],
     });
 
@@ -74,6 +76,14 @@ async function loadPlugins(plugin_set){
         break; 
         case 'SuperSlim':
             exec('sh install_superslim.sh', (error) => {
+                if (error){
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+            });
+        break;
+        case 'Theme Only':
+            exec('sh install_theme.sh', (error) => {
                 if (error){
                     console.error(`exec error: ${error}`);
                     return;
