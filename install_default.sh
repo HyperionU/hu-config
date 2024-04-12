@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-sh install_theme.sh
+code --install-extension vscode-icons-team.vscode-icons
+code --install-extension enkia.tokyo-night
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension eamodio.gitlens
 code --install-extension esbenp.prettier-vscode
