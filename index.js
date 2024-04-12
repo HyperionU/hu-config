@@ -61,7 +61,7 @@ async function loadStep() {
 
     var confirm_start = allow.confirmation;
 
-    confirm_start == 'Yes' ? await loadPlugins(values) : complete();
+    confirm_start == 'Yes' ? await loadPlugins(values) : process.exit(1);
 }
 
 async function loadPlugins(plugin_set){
