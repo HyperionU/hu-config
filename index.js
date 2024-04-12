@@ -28,33 +28,30 @@ async function welcome(){
 
 async function loadStep() {
     const answers = await inquirer.prompt({
-        name: 'plugins',
+        name: 'plugin_set',
         type: 'list',
         message: 'Which plugin set would you want to load? \n',
         choices: [
             'Normal',
             'Slim',
-            'SuperSlim'
+            'SuperSlim',
         ],
     });
 
-    var values = answers.plugins;
+    var values = answers.plugin_set;
     const spinner = createSpinner('Submitting Selection').start();
     await sleep();
     spinner.stop();
     await inquirer.prompt({
         name: 'Confirmation',
         message: `You have chosen ${JSON.stringify(values)}. Is that correct?`,
-        type: 'list',
+        type: 'confirm',
         choices: [
             'Yes',
             'No'
         ],
     });
-    const loadSpinner = createSpinner('Downloading').start();
     await loadPlugins(values);
-    loadSpinner.success();
-    complete();
 }
 
 async function loadPlugins(plugin_set){
@@ -66,7 +63,6 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
-            await sleep(5000)
         break;
         case 'Slim':
             exec('sh install_slim.sh', (error) => {
@@ -75,7 +71,6 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
-            await sleep(5000)
         break; 
         case 'SuperSlim':
             exec('sh install_superslim.sh', (error) => {
@@ -84,11 +79,13 @@ async function loadPlugins(plugin_set){
                     return;
                 }
             });
-            await sleep(5000)
         break;
     }
+    const loadSpinner = createSpinner('Downloading').start();
+    await sleep(5000);
+    loadSpinner.success();
+    complete();
 }
-
 
 async function complete() {
     console.clear();
@@ -102,8 +99,6 @@ async function complete() {
             console.log(gradient.pastel(data));
         }
     });
-
-    await sleep(2500);
 }
 
 await welcome()
