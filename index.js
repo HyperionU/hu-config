@@ -7,11 +7,11 @@ import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 import { exec } from 'child_process';
-import { stderr, stdout } from "process";
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function welcome(){
+    console.clear();
     const title = chalkAnimation.rainbow(
         'Hello World! \n'
     );
@@ -32,7 +32,7 @@ async function loadStep() {
         type: 'list',
         message: 'Which plugin set would you want to load? \n',
         choices: [
-            'Default',
+            'Normal',
             'Slim',
             'SuperSlim'
         ],
@@ -58,17 +58,39 @@ async function loadStep() {
 }
 
 async function loadPlugins(plugin_set){
-    plugin_set ? 
-        exec('echo hello', (error, stdout, stderr) => {
-            if (error){
-                console.error(`exec error: ${error}`);
-                return;
-            }
-        }): console.error(`Plugin Set is undefined`);
+    switch (plugin_set) {
+        case 'Normal':
+            exec('sh install_default.sh', (error) => {
+                if (error){
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+            });
+            await sleep(5000)
+        break;
+        case 'Slim':
+            exec('sh install_slim.sh', (error) => {
+                if (error){
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+            });
+            await sleep(5000)
+        break; 
+        case 'SuperSlim':
+            exec('sh install_superslim.sh', (error) => {
+                if (error){
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+            });
+            await sleep(5000)
+        break;
+    }
 }
 
 
-function complete() {
+async function complete() {
     console.clear();
     const message = `Loading Complete!`;
 
@@ -80,6 +102,8 @@ function complete() {
             console.log(gradient.pastel(data));
         }
     });
+
+    await sleep(2500);
 }
 
 await welcome()
