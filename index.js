@@ -7,7 +7,6 @@ import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 import { exec } from 'child_process';
-import { error } from "console";
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 
