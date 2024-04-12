@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
-import chalkAnimation from "chalk-animation";
 import inquirer from "inquirer";
 import gradient from "gradient-string";
 import figlet from "figlet";
@@ -12,16 +11,22 @@ const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function welcome(){
     console.clear();
-    const title = chalkAnimation.rainbow(
-        'Hello World! \n'
-    );
+    const title = 'Hello World!';
+
+    figlet(title, (error, data) => {
+        if (error !== null){
+            throw error;
+        }
+        if (error == null){
+            console.log(gradient.passion(data));
+        }
+    });
 
     await sleep();
-    title.stop();
 
     console.log(`
-        ${chalk.bgBlue('Welcome to HU-Config')}
-        The easy way to configure Hyperion University codespaces.
+        ${chalk.bgGreenBright('Welcome to HU-Config')}
+        The easy way to configure ${chalk.red('Hyperion University')} codespaces.
     `)
     loadStep()
 }
@@ -43,8 +48,9 @@ async function loadStep() {
     const spinner = createSpinner('Submitting Selection').start();
     await sleep();
     spinner.stop();
-    await inquirer.prompt({
-        name: 'Confirmation',
+
+    const allow = await inquirer.prompt({
+        name: 'confirmation',
         message: `You have chosen ${JSON.stringify(values)}. Is that correct?`,
         type: 'confirm',
         choices: [
@@ -52,7 +58,10 @@ async function loadStep() {
             'No'
         ],
     });
-    await loadPlugins(values);
+
+    var confirm_start = allow.confirmation;
+
+    confirm_start == 'Yes' ? await loadPlugins(values) : complete();
 }
 
 async function loadPlugins(plugin_set){
@@ -96,7 +105,7 @@ async function loadPlugins(plugin_set){
     complete();
 }
 
-async function complete() {
+function complete() {
     console.clear();
     const message = `Loading Complete!`;
 
