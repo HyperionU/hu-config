@@ -1,6 +1,6 @@
 {
   "name": "hu-config",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A configuration CLI for setting up Hyperion University codespaces",
   "homepage": "https://hyperionu.github.io",
   "main": "index.js",
