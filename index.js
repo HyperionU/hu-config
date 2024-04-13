@@ -209,6 +209,7 @@ async function complete() {
     await sleep();
 
     console.log(`${gradient.atlas(name)}, You are now ready to hit the ground runnin!`);
+    process.exit(0);
 }
 
 await welcome()
