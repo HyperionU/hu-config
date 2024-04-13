@@ -40,7 +40,8 @@ async function loadStep() {
             'Normal',
             'Slim',
             'SuperSlim',
-            'Theme Only'
+            'Theme Only',
+            'Custom'
         ],
     });
 
@@ -101,11 +102,68 @@ async function loadPlugins(plugin_set){
             });
             var ms = 5000;
         break;
+        case 'Custom':
+            await selectPlugins();
+        break;
     }
     const loadSpinner = createSpinner(`Downloading ${plugin_set}`).start();
     await sleep(ms);
     loadSpinner.success();
     complete();
+}
+
+async function selectPlugins(){
+    const customPlugin = await inquirer.prompt({
+        name: 'pluginList',
+        type: 'checkbox',
+        message: 'Select the plugins to download',
+        choices: [
+            'VS Code Icons',
+            'Tokyo Dark',
+            'MarkdownLint',
+            'GitLens',
+            'Prettier',
+            'GitHub Markdown Preview',
+            'HTMLHint',
+            'Marp for VS Code',
+            'GitHub Actions'
+        ]
+    });
+
+    var plugins = customPlugin.pluginList;
+
+    for (let index in plugins){
+        switch (plugins[index]){
+            case 'VS Code Icons':
+                exec('code --install-extension vscode-icons-team.vscode-icons', (error) => {});
+            break;
+            case 'Tokyo Dark':
+                exec('code --install-extension enkia.tokyo-night', (error) => {});
+            break;
+            case 'MarkdownLint':
+                exec('code --install-extension DavidAnson.vscode-markdownlint', (error) => {});
+            break;
+            case 'GitLens':
+                exec('code --install-extension eamodio.gitlens', (error) => {});
+            break;
+            case 'Prettier':
+                exec('code --install-extension esbenp.prettier-vscode', (error) => {});
+            break;
+            case 'GitHub Markdown Preview':
+                exec('code --install-extension bierner.github-markdown-preview', (error) => {});
+            break;
+            case 'HTMLHint':
+                exec('code --install-extension htmlhint.vscode-htmlhint', (error) => {});
+            break;
+            case 'Marp for VS Code':
+                exec('code --install-extension marp-team.marp-vscode', (error) => {});
+            break;
+            case 'GitHub Actions':
+                exec('code --install-extension GitHub.vscode-github-actions', (error) => {});
+            break;
+        }
+    }
+
 }
 
 function complete() {
