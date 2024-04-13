@@ -17,7 +17,7 @@ async function welcome(){
         if (error !== null){
             throw error;
         }
-        console.log(gradient.passion(data));
+        console.log(gradient.atlas(data));
     });
 
     await sleep();
