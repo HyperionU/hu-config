@@ -17,9 +17,7 @@ async function welcome(){
         if (error !== null){
             throw error;
         }
-        if (error == null){
-            console.log(gradient.passion(data));
-        }
+        console.log(gradient.passion(data));
     });
 
     await sleep();
@@ -174,9 +172,7 @@ function complete() {
         if (error !== null){
             throw error;
         }
-        if (error == null){
-            console.log(gradient.pastel(data));
-        }
+        console.log(gradient.pastel(data));
     });
 }
 
