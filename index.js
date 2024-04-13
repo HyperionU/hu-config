@@ -115,6 +115,7 @@ async function loadStep() {
 }
 
 async function loadPluginSet(plugin_set){
+    var ms;
     switch (plugin_set) {
         case 'Normal':
            exec('sh install_default.sh');
