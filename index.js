@@ -135,7 +135,6 @@ async function loadPluginSet(plugin_set){
         break;
         case 'Custom':
             await selectPlugins();
-            ms = 2000
         break;
     }
 
