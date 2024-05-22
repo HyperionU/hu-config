@@ -5,7 +5,7 @@ import inquirer from "inquirer";
 import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
-import { exec } from 'child_process';
+/* import { exec } from 'child_process'; */
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 var name;
@@ -82,7 +82,7 @@ async function runTutorial(){
 
 async function loadStep() {
     console.clear();
-    const answers = await inquirer.prompt({
+    /*const answers = await inquirer.prompt({
         name: 'plugin_set',
         type: 'list',
         message: `So, ${gradient.atlas(name)}, which plugin set would you want to load? \n`,
@@ -109,37 +109,15 @@ async function loadStep() {
             'No'
         ]
     });
-
-    var confirm = allow.confirmation;
-    confirm == 'Yes' ? loadPluginSet(values) : process.exit(1);
+*/
+    await selectPlugins();
 }
 
 async function loadPluginSet(plugin_set){
-    var ms;
-    switch (plugin_set) {
-        case 'Normal':
-           exec('sh install_default.sh');
-           ms = 22000;
-        break;
-        case 'Slim':
-            exec('sh install_slim.sh'); 
-            ms = 10000;
-        break; 
-        case 'SuperSlim':
-            exec('sh install_superslim.sh'); 
-            ms = 8000;
-        break;
-        case 'Theme Only':
-            exec('sh install_theme.sh'); 
-            ms = 5000;
-        break;
-        case 'Custom':
-            await selectPlugins();
-        break;
-    }
+    await selectPlugins();
 
     const loadSpinner = createSpinner(`Downloading ${plugin_set}`).start();
-    await sleep(ms);
+    await sleep();
     loadSpinner.success();
     complete();
 }
