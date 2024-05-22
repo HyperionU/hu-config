@@ -5,7 +5,7 @@ import inquirer from "inquirer";
 import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
-/* import { exec } from 'child_process'; */
+import { exec } from 'child_process';
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 var name;
@@ -82,41 +82,9 @@ async function runTutorial(){
 
 async function loadStep() {
     console.clear();
-    /*const answers = await inquirer.prompt({
-        name: 'plugin_set',
-        type: 'list',
-        message: `So, ${gradient.atlas(name)}, which plugin set would you want to load? \n`,
-        choices: [
-            'Normal',
-            'Slim',
-            'SuperSlim',
-            'Theme Only',
-            'Custom'
-        ],
-    });
-
-    var values = answers.plugin_set;
-    const spinner = createSpinner('Submitting Selection').start();
-    await sleep();
-    spinner.stop();
-
-    const allow = await inquirer.prompt({
-        name: 'confirmation',
-        message: `You have chosen ${JSON.stringify(values)}. Is that correct?`,
-        type: 'list',
-        choices: [
-            'Yes',
-            'No'
-        ]
-    });
-*/
-    await selectPlugins();
-}
-
-async function loadPluginSet(plugin_set){
     await selectPlugins();
 
-    const loadSpinner = createSpinner(`Downloading ${plugin_set}`).start();
+    const loadSpinner = createSpinner(`Downloading...`).start();
     await sleep();
     loadSpinner.success();
     complete();
