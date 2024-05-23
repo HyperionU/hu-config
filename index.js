@@ -48,7 +48,7 @@ async function runTutorial(){
     console.clear();
     const text = 'How HU-Config Works';
 
-    figlet(text, (error, data) => { error !== null ? console.error(error) : console.log(gradient.atlas(data))});
+    figlet(text, (error, data) => { error != null ? console.error(error) : console.log(gradient.atlas(data))});
 
     await sleep(1000);
 
