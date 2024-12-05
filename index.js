@@ -6,8 +6,8 @@ import gradient from "gradient-string";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 import { exec } from 'child_process';
+import { setTimeout } from "timers/promises";
 
-const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms))
 var name;
 
 async function welcome(){
@@ -16,7 +16,7 @@ async function welcome(){
 
     figlet(title, (error, data) => { error !== null ? console.error(error) : console.log(gradient.atlas(data));});
 
-    await sleep();
+    await setTimeout(2000);
 
     console.log(`
         ${chalk.bgGreenBright('Welcome to HU-Config')}
@@ -50,7 +50,7 @@ async function runTutorial(){
 
     figlet(text, (error, data) => { error != null ? console.error(error) : console.log(gradient.atlas(data))});
 
-    await sleep(1000);
+    await setTimeout(1000);
 
     console.log(`
         1. Run the CLI (obviously)
@@ -85,7 +85,7 @@ async function loadStep() {
     await selectPlugins();
 
     const loadSpinner = createSpinner(`Downloading...`).start();
-    await sleep();
+    await setTimeout(2000);
     loadSpinner.success();
     complete();
 }
@@ -151,7 +151,7 @@ async function complete() {
     const message = `Loading Complete!`;
     figlet(message, (error, data) => { error ? console.error(error) : console.log(gradient.pastel(data))});
 
-    await sleep();
+    await setTimeout(2000);
 
     console.log(`${gradient.atlas(name)}, You are now ready to hit the ground runnin!`);
     process.exit(0);
