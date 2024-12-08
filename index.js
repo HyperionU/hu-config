@@ -3,8 +3,8 @@ import { intro } from "./prompts/intro.js";
 import { packagePrompt } from "./prompts/packages.js";
 import { installPrep } from "./utils/prepPackageSet.js";
 import { installPackage } from "./utils/installPackage.js";
-/*import { nitroxCLI } from "./prompts/nitrox.js";/*
-/*import { turboCLI } from "./prompts/turbo.js";*/
+/*import { startTurbo } from "./utils/installTurbo.js";*/
+/*import { nitroxCLI } from "./prompts/nitrox.js";*/
 
 const runCLI = async () => {
     console.clear();
@@ -22,7 +22,7 @@ const runCLI = async () => {
     })
 
     /*flags.nitrox && await nitroxCLI()*/
-    /*flags.turbo && await turboCLI()*/
+    /*flags.turbo && await startTurbo()*/
 
 }
 
